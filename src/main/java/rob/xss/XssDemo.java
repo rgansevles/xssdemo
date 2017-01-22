@@ -1,5 +1,7 @@
 package rob.xss;
-import static spark.Spark.*;
+import static spark.Spark.get;
+
+import org.owasp.encoder.Encode;
 
 public class XssDemo {
 
@@ -11,8 +13,8 @@ public class XssDemo {
 		if (args == null || args.length == 0) {
 			return "??";
 		}
-		
-		return args[0];
+
+		return Encode.forHtml(args[0]);
 	}
 
 }
