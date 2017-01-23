@@ -4,7 +4,10 @@ import static spark.Spark.*;
 public class XssDemo {
 
 	public static void main(String[] args) {
-		get("/xssdemo", (req, res) -> "<html></body>"+getMessage(args)+"<html></body>");
+		get("/xssdemo", (req, res) -> {
+			res.header("Content-Security-Policy", "script-src 'self'");
+			return "<html></body>"+getMessage(args)+"<html></body>";
+		});
 	}
 
 	private static String getMessage(String[] args) {
